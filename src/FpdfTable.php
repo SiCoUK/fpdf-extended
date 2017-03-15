@@ -11,7 +11,7 @@
 
 namespace SiCoUK\FpdfTable;
 
-class Table
+class FpdfTable
 {
     protected $_pdf;
     
