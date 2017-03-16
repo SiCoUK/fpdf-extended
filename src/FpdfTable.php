@@ -20,6 +20,7 @@ class FpdfTable
     protected $_headers = array();
     protected $_border = true;
     protected $_fill = false;
+    protected $_striping = true;
 
     /**
      *
@@ -81,6 +82,16 @@ class FpdfTable
     }
     
     /**
+     * Set whether the table should be striped
+     * 
+     * @param boolean $striping
+     */
+    public function setStriping($striping = true)
+    {
+        $this->_striping = (bool) $striping;
+    }
+    
+    /**
      * Output the table headers
      */
     public function headers()
@@ -117,6 +128,9 @@ class FpdfTable
         $h = $this->_rowHeight * $nb;
         
         // Set up the fill colour
+        if (!$this->_striping) {
+            $this->_fill = false;
+        }
         $this->_pdf->SetFillColor(224,235,255);
         $this->_pdf->SetTextColor(0);
         
