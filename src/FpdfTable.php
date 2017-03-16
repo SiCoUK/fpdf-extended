@@ -9,7 +9,7 @@
  * @copyright Copyright Simon Corless 2011
  */
 
-namespace SiCoUK\FpdfTable;
+namespace SiCoUK\FpdfExtended;
 
 class FpdfTable
 {

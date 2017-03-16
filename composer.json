@@ -1,10 +1,10 @@
 {
-    "name": "SiCoUK/fpdftable",
-    "description": "Table helper for FPDF.",
+    "name": "SiCoUK/fpdf-extended",
+    "description": "Extension of FPDF with a table helper.",
   
     "autoload": {
         "psr-0": {
-            "SiCoUK\\FpdfTable": "src/"
+            "SiCoUK\\FpdfExtended": "src/"
         }
     }
 }
