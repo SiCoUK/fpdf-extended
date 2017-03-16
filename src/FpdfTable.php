@@ -18,6 +18,8 @@ class FpdfTable
     protected $widths = array();
     protected $aligns = array();
     protected $_headers = array();
+    protected $_border = true;
+    protected $_fill = false;
 
     /**
      *
@@ -69,6 +71,16 @@ class FpdfTable
     }
     
     /**
+     * Set whether the table should be bordered
+     * 
+     * @param boolean $border
+     */
+    public function setBorder($border = true)
+    {
+        $this->_border = (bool) $border;
+    }
+    
+    /**
      * Output the table headers
      */
     public function headers()
@@ -78,9 +90,15 @@ class FpdfTable
             return;
         }
         
+        // Set a bottom border or surround if border set to true
+        $border = 'B';
+        if ($this->_border) {
+            $border = '1';
+        }
+        
         // Loop through the headers
         foreach($this->_headers AS $col => $title) {
-            $this->_pdf->Cell($this->widths[$col], 7, $title, 1);
+            $this->_pdf->Cell($this->widths[$col], 7, $title, 'B');
         }
         $this->_pdf->Ln();
     }
@@ -98,6 +116,10 @@ class FpdfTable
         }
         $h = $this->_rowHeight * $nb;
         
+        // Set up the fill colour
+        $this->_pdf->SetFillColor(224,235,255);
+        $this->_pdf->SetTextColor(0);
+        
         //Issue a page break first if needed
         $this->checkPageBreak($h);
         
@@ -109,12 +131,16 @@ class FpdfTable
             $x = $this->_pdf->GetX();
             $y = $this->_pdf->GetY();
             //Draw the border
-            $this->_pdf->Rect($x, $y, $w, $h);
+            if ($this->_border) {
+                $this->_pdf->Rect($x, $y, $w, $h);
+            }
             //Print the text
-            $this->_pdf->MultiCell($w, $this->_rowHeight, $data[$i], 0, $a);
+            $this->_pdf->MultiCell($w, $this->_rowHeight, $data[$i], 0, $a, $this->_fill);
             //Put the position to the right of the cell
             $this->_pdf->SetXY($x+$w, $y);
         }
+        
+        $this->_fill = !$this->_fill;
         
         //Go to the next line
         $this->_pdf->Ln($h);
