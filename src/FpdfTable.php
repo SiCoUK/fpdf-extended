@@ -4,11 +4,10 @@
  * Based on Table with MultiCells Add On by Olivier
  * http://www.fpdf.de/downloads/addons/3/
  *
- * @version 7th October 2011
+ * @version 16th March 2017
  * @author Simon Corless simon@sico.co.uk
- * @copyright Copyright Simon Corless 2011
+ * @copyright Copyright Simon Corless 2017
  */
-
 namespace SiCoUK\FpdfExtended;
 
 class FpdfTable
@@ -128,8 +127,8 @@ class FpdfTable
      */
     protected function checkPageBreak($h)
     {
-        if($this->_pdf->GetY() + $h > $this->_pdf->PageBreakTrigger) {
-            $this->_pdf->AddPage($this->_pdf->CurOrientation);
+        if($this->_pdf->GetY() + $h > $this->_pdf->getPageBreakTrigger()) {
+            $this->_pdf->AddPage($this->_pdf->getCurOrientation());
         }
     }
     
