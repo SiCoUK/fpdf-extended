@@ -22,7 +22,7 @@ class FpdfTable
     protected $_fill = false;
     protected $_striping = true;
     protected $_stripeColours = array(
-        'r' => 210,
+        'r' => 220,
         'g' => null,
         'b' => null,
     );
@@ -153,7 +153,6 @@ class FpdfTable
             $this->_fill = false;
         } else {
             $this->_pdf->SetFillColor($this->_stripeColours['r'], $this->_stripeColours['g'], $this->_stripeColours['b']);
-            $this->_pdf->SetTextColor(0);
         }
         
         //Issue a page break first if needed
