@@ -21,6 +21,11 @@ class FpdfTable
     protected $_border = true;
     protected $_fill = false;
     protected $_striping = true;
+    protected $_stripeColours = array(
+        'r' => 210,
+        'g' => null,
+        'b' => null,
+    );
 
     /**
      *
@@ -92,6 +97,22 @@ class FpdfTable
     }
     
     /**
+     * Set the RGB colour of the striping
+     * 
+     * @param int $r Red value or if nothing else is set acts as a grey level value
+     * @param int|null $g Green value
+     * @param int|null $b Blue Value
+     */
+    public function setStripeColour($r, $g = null, $b = null)
+    {
+        $this->_stripeColours = array(
+            'r' => $r,
+            'g' => $g,
+            'b' => $b,
+        );
+    }
+    
+    /**
      * Output the table headers
      */
     public function headers()
@@ -130,9 +151,10 @@ class FpdfTable
         // Set up the fill colour
         if (!$this->_striping) {
             $this->_fill = false;
+        } else {
+            $this->_pdf->SetFillColor($this->_stripeColours['r'], $this->_stripeColours['g'], $this->_stripeColours['b']);
+            $this->_pdf->SetTextColor(0);
         }
-        $this->_pdf->SetFillColor(224,235,255);
-        $this->_pdf->SetTextColor(0);
         
         //Issue a page break first if needed
         $this->checkPageBreak($h);
