@@ -4,7 +4,7 @@
   
     "autoload": {
         "psr-4": {
-            "SiCoUK\\FpdfExtended": "src/"
+            "SiCoUK\\FpdfExtended\\": "src/"
         }
     }
 }
