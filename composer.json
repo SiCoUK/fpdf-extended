@@ -3,7 +3,7 @@
     "description": "Extension of FPDF with a table helper.",
   
     "autoload": {
-        "psr-0": {
+        "psr-4": {
             "SiCoUK\\FpdfExtended": "src/"
         }
     }
